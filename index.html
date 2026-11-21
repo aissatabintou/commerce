@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="/style.css">
+  <title>Frontend Mentor | E-commerce product page</title>
+</head>
+
+<body>
+  <div class="contenaire">
+    <header>
+      <a href="" class="logo">sneakers</a>
+      <nav class="navbar">
+        <ul>
+          <li><a href="" class=" a active">Collections</a></li>
+          <li><a href="" class="a">Men</a></li>
+          <li><a href="" class="a">Women</a></li>
+          <li><a href="" class="a">About</a></li>
+          <li><a href="" class="a">Contact</a></li>
+        </ul>
+      </nav>
+      <img src="/images/icon-cart.svg" alt="" class="img">
+      <img src="/images/image-avatar.png" alt="" class="img2">
+      <img src="/images/icon-menu.svg" alt="" class="menu">
+    </header>
+    <main>
+      <section class="gallery">
+        <div class="main-image">
+          <button class="btn-previous prev">
+            <img src="/images/icon-previous.svg" alt="">
+          </button>
+          <div class="carousel">
+            <img src="/images/image-product-1.jpg" alt="">
+            <img src="/images/image-product-2.jpg" alt="">
+            <img src="/images/image-product-3.jpg" alt="">
+            <img src="/images/image-product-4.jpg" alt="">
+          </div>
+          <button class="btn-previous next">
+            <img src="/images/icon-next.svg" alt="">
+          </button>
+        </div>
+
+        <div class="thumbnail">
+          <button class="thumb actif">
+            <img src="/images/image-product-1-thumbnail.jpg" alt="">
+          </button>
+
+          <button class="thumb">
+            <img src="/images/image-product-2-thumbnail.jpg" alt="">
+          </button>
+
+          <button class="thumb">
+            <img src="/images/image-product-3-thumbnail.jpg" alt="">
+          </button>
+
+          <button class="thumb">
+            <img src="/images/image-product-4-thumbnail.jpg" alt="">
+          </button>
+        </div>
+      </section>
+      <section class="text">
+        <div class="text1">
+          <h3> Sneaker Company</h3><br>
+          <h1>Fall Limited Edition <br>Sneakers</h1><br><br>
+          <p> These low-profile sneakers are your perfect casual wear <br>companion. Featuring a
+            durable rubber outer sole, they’ll <br>withstand everything the weather can offer.
+          </p>
+        </div>
+        <div class="text2">
+          <div class="b1">
+            <p class="number"> $125.00</p>
+            <p class="pourcent"> 50%</p>
+          </div>
+          <div class="b2">
+            <p>$250.00</p>
+          </div>
+        </div>
+        <div class="btn">
+          <button class="btn1">
+            <img src="/images/icon-minus.svg" alt="">
+            <span>0</span>
+            <img src="/images/icon-plus.svg" alt="">
+          </button>
+          <button class="btn2">
+            <img src="/images/icon-cart.svg" alt="">
+            <p>Add to cart</p>
+          </button>
+          <button class="click">On click</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // let tableau = ["Bintou", "Oumou", "Abassa", "Yasser"];
+    // let click = document.querySelector(".click");
+
+    // click.addEventListener("click", () => {
+    //   for (let index = 0; index < tableau.length; index++) {
+    //     const newButton = document.createElement("button") 
+    //     const element = tableau[index];
+    //     newButton.textContent = element;
+    //     newButton.className = "button";
+    //     const button = document.querySelector('.button'); 
+    //       document.body.appendChild(newButton);
+    //   }
+    // });
+
+
+
+
+
+
+
+    let navbar = document.querySelector(".navbar");
+    let menu = document.querySelector(".menu");
+    const a = document.querySelectorAll(".a")
+    a.forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        a.forEach(l => l.classList.remove("active")
+        );
+        link.classList.add("active")
+
+      });
+    });
+
+    menu.addEventListener("click",
+      function () {
+        navbar.classList.toggle("active")
+      }
+    );
+
+
+    const prev = document.querySelector(".btn-previous.prev")
+    const next = document.querySelector(".btn-previous.next")
+    const carouselimage = document.querySelectorAll(".carousel img")
+    const carousel = document.querySelector(".carousel")
+    let currentIndex = 0;
+    const totalImages = carouselimage.length;
+    const thumbnail = document.querySelectorAll(".thumb")
+    thumbnail.forEach((thumb, index) => {
+      thumb.addEventListener("click", () => {
+        currentIndex = index;
+        updateCarousel();
+      });
+    });
+    function updateCarousel() {
+      const offset = ((currentIndex) * -100);
+      carousel.style.transform = `translateX(${offset}%)`;
+      thumbnail.forEach((thumb, index) => {
+        thumb.classList.toggle("actif", index === currentIndex)
+      })
+    }
+    next.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+      updateCarousel();
+    });
+    prev.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1 + totalImages) % totalImages;
+      updateCarousel();
+    });
+
+    // const minimage = 4;
+    // let start = 0;
+    // const end = (100 * (minimage - 1));
+
+    // next.addEventListener("click", left)
+    // function left() {
+    //   if (start < 0) {
+    //     start = start + 100
+
+    //   }
+    //   carousel.forEach(element => {
+
+    //     element.style.transform = `translateX(${start}%)`;
+    //   })
+    // }
+
+    // prev.addEventListener("click", right)
+    // function right() {
+    //   if (start > -end) {
+    //     start = start - 100;
+
+    //   }
+    //   carousel.forEach(element => {
+    //     element.style.transform = `translateX(${start}%)`;
+    //   })
+
+    // }
+
+
+    // function autorende() {
+    //   if (start < -end) {
+    //     right()
+    //   }
+    //   else {
+    //     start = 0;
+    //     left()
+    //   }
+
+    // }
+    // setInterval(autorende, 20000)
+
+  </script>
+</body>
+
+</html>
